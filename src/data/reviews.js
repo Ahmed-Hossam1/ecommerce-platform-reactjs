@@ -4,8 +4,6 @@ const reviews = [
     { id: 3, productId: 1, user: "Mike R.", rating: 5, comment: "Perfect for working from home. Blocks out all distractions.", date: "2026-01-03" },
     { id: 4, productId: 2, user: "Jessica L.", rating: 4, comment: "Sturdy and looks great on my desk. Easy to adjust the angle.", date: "2025-11-28" },
     { id: 5, productId: 2, user: "David P.", rating: 5, comment: "My neck pain is gone after using this stand. Highly recommend!", date: "2025-12-10" },
-    { id: 6, productId: 3, user: "Chris T.", rating: 5, comment: "The key switches feel amazing. RGB lighting is a nice bonus.", date: "2026-01-05" },
-    { id: 7, productId: 3, user: "Emma W.", rating: 5, comment: "Upgraded from a membrane keyboard and the difference is night and day.", date: "2026-01-10" },
     { id: 8, productId: 4, user: "Ryan B.", rating: 4, comment: "Beautiful craftsmanship. The leather will only get better with age.", date: "2025-12-22" },
     { id: 9, productId: 5, user: "Lisa H.", rating: 5, comment: "Tracks everything accurately. The sleep tracking changed my habits.", date: "2026-01-08" },
     { id: 10, productId: 5, user: "Tom C.", rating: 4, comment: "Great fitness features. GPS accuracy is spot on for running.", date: "2026-01-15" },
@@ -30,7 +28,6 @@ const reviews = [
     { id: 29, productId: 22, user: "Isla C.", rating: 4, comment: "Sound quality rivals the big-name brands at half the price.", date: "2026-01-25" },
     { id: 30, productId: 23, user: "Henry D.", rating: 5, comment: "Beautifully tailored. Gets compliments every time I wear it.", date: "2026-01-04" },
     { id: 31, productId: 24, user: "Ella F.", rating: 4, comment: "Mixes well and doesn't have that chalky texture. Great flavor too.", date: "2026-01-21" },
-    { id: 32, productId: 3, user: "Leo G.", rating: 4, comment: "Solid build quality. The wrist rest is surprisingly comfortable.", date: "2026-01-28" },
 ];
 
 export default reviews;

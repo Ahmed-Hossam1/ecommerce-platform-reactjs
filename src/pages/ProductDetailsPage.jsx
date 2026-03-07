@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { getProductById } from "../features/products/services/productService";
 import useCartStore from "../features/cart/hooks/useCartStore";
 import useWishlistStore from "../features/wishlist/hooks/useWishlistStore";
+import ProductReviews from "../features/products/components/ProductReviews";
 
 export default function ProductDetailsPage() {
     const { id } = useParams();
@@ -218,7 +219,7 @@ export default function ProductDetailsPage() {
                             Add to Cart
                         </button>
                         <button
-                            onClick={() =>  isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product)}
+                            onClick={() => isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product)}
                             className={`px-4 py-3.5 rounded-xl border-2 transition-all ${isInWishlist
                                 ? "border-accent-500 bg-accent-50 text-accent-500"
                                 : "border-gray-200 text-gray-400 hover:border-accent-300 hover:text-accent-500"
@@ -234,18 +235,10 @@ export default function ProductDetailsPage() {
                         </button>
                     </div>
 
-                    {/* Reviews Placeholder — Student task to implement */}
-                    <div className="mt-10 border-t border-gray-100 pt-8">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4">
-                            Customer Reviews
-                        </h3>
-                        <div className="bg-gray-50 rounded-xl p-6 text-center">
-                            <p className="text-gray-400 text-sm">
-                                Reviews will be displayed here.
-                            </p>
-                        </div>
-                    </div>
                 </div>
+
+                {/* Reviews */}
+                <ProductReviews productId={id} />
             </div>
         </div>
     );
