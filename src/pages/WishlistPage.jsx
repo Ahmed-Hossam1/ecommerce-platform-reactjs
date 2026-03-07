@@ -6,7 +6,6 @@ export default function WishlistPage() {
     const items = useWishlistStore((s) => s.items);
     const removeFromWishlist = useWishlistStore((s) => s.removeFromWishlist);
     const addToCart = useCartStore((s) => s.addToCart);
-
     if (items.length === 0) {
         return (
             <div className="max-w-7xl mx-auto px-4 py-16 text-center">
@@ -78,7 +77,6 @@ export default function WishlistPage() {
                                 <button
                                     onClick={() => {
                                         addToCart(item);
-                                        // Note: removeFromWishlist is not fully implemented
                                         removeFromWishlist(item.id);
                                     }}
                                     className="flex-1 py-2 bg-primary-600 text-white text-xs font-medium rounded-lg hover:bg-primary-700 transition-colors"

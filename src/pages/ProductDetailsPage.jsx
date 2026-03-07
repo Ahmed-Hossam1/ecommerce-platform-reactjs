@@ -11,6 +11,7 @@ export default function ProductDetailsPage() {
     const [countdown, setCountdown] = useState(null);
     const addToCart = useCartStore((s) => s.addToCart);
     const addToWishlist = useWishlistStore((s) => s.addToWishlist);
+    const removeFromWishlist = useWishlistStore((s) => s.removeFromWishlist);
     const isInWishlist = useWishlistStore((s) => s.isInWishlist(Number(id)));
 
     useEffect(() => {
@@ -171,7 +172,7 @@ export default function ProductDetailsPage() {
                                 ].map((unit) => (
                                     <div
                                         key={unit.label}
-                                        className="text-center bg-white rounded-xl px-3 py-2 shadow-sm min-w-[60px]"
+                                        className="text-center bg-white rounded-xl px-3 py-2 shadow-sm min-w-15"
                                     >
                                         <div className="text-xl font-bold text-gray-900">
                                             {String(unit.value).padStart(2, "0")}
@@ -217,7 +218,7 @@ export default function ProductDetailsPage() {
                             Add to Cart
                         </button>
                         <button
-                            onClick={() => addToWishlist(product)}
+                            onClick={() =>  isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product)}
                             className={`px-4 py-3.5 rounded-xl border-2 transition-all ${isInWishlist
                                 ? "border-accent-500 bg-accent-50 text-accent-500"
                                 : "border-gray-200 text-gray-400 hover:border-accent-300 hover:text-accent-500"

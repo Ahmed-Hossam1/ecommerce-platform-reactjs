@@ -11,8 +11,9 @@ const useWishlistStore = create((set, get) => ({
     },
 
     // Partial implementation — students should complete this
-    removeFromWishlist: (productId) => { // eslint-disable-line no-unused-vars
-        // TODO: Implement removal logic
+    removeFromWishlist: (productId) => { 
+        const items = get().items;
+        return set({ items: items.filter((item) => item.id !== productId) });
     },
 
     isInWishlist: (productId) => {
