@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { getProducts, getCategories } from "../features/products/services/productService";
+/* eslint-disable react-hooks/set-state-in-effect */
+import { useEffect, useState } from "react";
 import ProductCard from "../features/products/components/ProductCard";
+import { filterProducts, getCategories } from "../features/products/services/productService";
 
 export default function ProductsPage() {
     const [products, setProducts] = useState([]);
@@ -13,29 +14,30 @@ export default function ProductsPage() {
     const [sortBy, setSortBy] = useState("title");
     const [sortOrder, setSortOrder] = useState("asc");
     const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const productsPerPage = 8;
 
     useEffect(() => {
         async function load() {
             setLoading(true);
             // Currently just loads all products — students should use filterProducts()
-            const allProducts = await getProducts();
-            setProducts(allProducts);
-            const cats = await getCategories();
+                const searchedProducts = await filterProducts({ search , category: selectedCategory , sortBy , sortOrder , limit: productsPerPage , page : currentPage  });
+                setProducts(searchedProducts.data);
+                setTotalPages(searchedProducts.totalPages);
+                setCurrentPage(searchedProducts.page);
+                
+                const cats = await getCategories();
             setCategories(cats);
             // Simulate a short loading time so the spinner is visible
-            setTimeout(() => setLoading(false), 600);
+            setTimeout(() => setLoading(false), 200);
         }
         load();
-    }, []);
+    }, [search , selectedCategory , sortBy , sortOrder , currentPage]);
 
-    // Basic client-side pagination (not using filterProducts — student task)
-    const startIndex = (currentPage - 1) * productsPerPage;
-    const paginatedProducts = products.slice(
-        startIndex,
-        startIndex + productsPerPage
-    );
-    const totalPages = Math.ceil(products.length / productsPerPage);
+
+ useEffect(() => {
+    setCurrentPage(1);
+}, [search, selectedCategory, sortBy, sortOrder]);
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -117,13 +119,13 @@ export default function ProductsPage() {
                 <>
                     {/* Product Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-                        {paginatedProducts.map((product) => (
+                        {products.map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))}
                     </div>
 
                     {/* Empty State */}
-                    {paginatedProducts.length === 0 && (
+                    {products.length === 0 && (
                         <div className="text-center py-16">
                             <svg
                                 className="w-16 h-16 text-gray-300 mx-auto mb-4"
