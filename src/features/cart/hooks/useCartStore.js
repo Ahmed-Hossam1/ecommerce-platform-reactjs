@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import toast from "react-hot-toast";
+
 
 const useCartStore = create((set, get) => ({
     items: [],
@@ -9,7 +11,10 @@ const useCartStore = create((set, get) => ({
 
         if (existingItem) {
             // Prevent exceeding stock
-            if (existingItem.quantity >= product.stock) return;
+            if (existingItem.quantity >= product.stock) {
+                toast.error(`Cannot add more than ${product.stock} items of this product`);
+                return;
+            }
             set({
                 items: items.map((item) =>
                     item.id === product.id
@@ -17,10 +22,12 @@ const useCartStore = create((set, get) => ({
                         : item
                 ),
             });
+            toast.success(`Increased ${product.name || 'Product'} quantity`);
         } else {
             set({
                 items: [...items, { ...product, quantity: 1 }],
             });
+            toast.success(`${product.name || 'Product'} added to cart`);
         }
     },
 
@@ -28,6 +35,7 @@ const useCartStore = create((set, get) => ({
         set({
             items: get().items.filter((item) => item.id !== productId),
         });
+        toast.success("Item removed from cart");
     },
 
     // BUG: This function does NOT prevent quantity from going to 0 or negative.
@@ -41,19 +49,22 @@ const useCartStore = create((set, get) => ({
         // Prevent exceeding stock
         if (newQuantity > item.stock) return;
 
-         if(newQuantity <= 0)  {
-            set ({items: items.filter((i) => i.id !== productId)})
+        if (newQuantity <= 0) {
+            set({ items: items.filter((i) => i.id !== productId) })
             return;
-         }
+        }
 
         set({
             items: items.map((i) =>
-                i.id === productId ?  { ... item , quantity : newQuantity  } : i
+                i.id === productId ? { ...item, quantity: newQuantity } : i
             ),
         });
     },
 
-    clearCart: () => set({ items: [] }),
+    clearCart: () => {
+        set({ items: [] });
+        toast.success("Cart cleared");
+    },
 
     get totalItems() {
         return get().items.reduce((sum, item) => sum + item.quantity, 0);
