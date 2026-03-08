@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "../features/products/components/ProductCard";
 import { filterProducts, getCategories } from "../features/products/services/productService";
 import { useSearchParams } from "react-router-dom";
+import SkeletonLoader from "../components/Skeleton";
 
 export default function ProductsPage() {
     const [products, setProducts] = useState([]);
@@ -121,10 +122,7 @@ export default function ProductsPage() {
 
             {/* Loading Spinner */}
             {loading ? (
-                <div className="flex flex-col items-center justify-center py-24">
-                    <div className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin mb-4" />
-                    <p className="text-gray-500 text-sm">Loading products...</p>
-                </div>
+                <SkeletonLoader /> 
             ) : (
                 <>
                     {/* Product Grid */}

@@ -2,18 +2,22 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProducts, getCategories } from "../features/products/services/productService";
 import ProductCard from "../features/products/components/ProductCard";
+import SkeletonLoader from "../components/Skeleton";
 
 export default function HomePage() {
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function load() {
+            setLoading(true);
             const products = await getProducts();
             const sorted = [...products].sort((a, b) => b.rating - a.rating);
             setFeaturedProducts(sorted.slice(0, 4));
             const cats = await getCategories();
             setCategories(cats);
+            setLoading(false);
         }
         load();
     }, []);
@@ -138,11 +142,17 @@ export default function HomePage() {
                             </svg>
                         </Link>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                     {
+                        loading ? <SkeletonLoader/> : 
+                         (
+                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {featuredProducts.map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))}
                     </div>
+                    )
+                     }
+                    
                 </div>
             </section>
 
