@@ -41,10 +41,14 @@ const useCartStore = create((set, get) => ({
         // Prevent exceeding stock
         if (newQuantity > item.stock) return;
 
-        // BUG: No check for newQuantity <= 0
+         if(newQuantity <= 0)  {
+            set ({items: items.filter((i) => i.id !== productId)})
+            return;
+         }
+
         set({
             items: items.map((i) =>
-                i.id === productId ? { ...i, quantity: newQuantity } : i
+                i.id === productId ?  { ... item , quantity : newQuantity  } : i
             ),
         });
     },
@@ -75,3 +79,5 @@ const useCartStore = create((set, get) => ({
 }));
 
 export default useCartStore;
+
+
