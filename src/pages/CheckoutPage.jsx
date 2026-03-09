@@ -1,35 +1,26 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useCartStore from "../features/cart/hooks/useCartStore";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { checkoutSchema } from "../schema";
+import { checkoutForm } from "../constant";
 
 export default function CheckoutPage() {
     const items = useCartStore((s) => s.items);
     const clearCart = useCartStore((s) => s.clearCart);
     const [orderPlaced, setOrderPlaced] = useState(false);
 
-    const [form, setForm] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        address: "",
-        city: "",
-        zipCode: "",
-        country: "",
-    });
-
     const totalPrice = items.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
     );
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+     const { register, handleSubmit , formState : {errors} } = useForm({
+        resolver: yupResolver(checkoutSchema),
+     });
 
-    // No validation implemented — student task
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = () => {
         clearCart();
         setOrderPlaced(true);
     };
@@ -97,7 +88,7 @@ export default function CheckoutPage() {
                 </p>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Shipping Form */}
                     <div className="lg:col-span-2">
@@ -106,105 +97,27 @@ export default function CheckoutPage() {
                                 Shipping Information
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
+                                {
+                                checkoutForm.map((input) => (
+                                  <div key={input.id}>
                                     <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        First Name
+                                        {input.label}
                                     </label>
                                     <input
-                                        type="text"
-                                        name="firstName"
-                                        value={form.firstName}
-                                        onChange={handleChange}
+                                       type={input.type}
+                                       name={input.name}
+                                       {...register(input.name)}
                                         className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                                        placeholder="John"
+                                        placeholder= {input.placeholder}
                                     />
+                                   {errors && <p className="text-sm mt-1 text-red-700">{errors[input.name]?.message}</p>} 
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        Last Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="lastName"
-                                        value={form.lastName}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                                        placeholder="Doe"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        Email
-                                    </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={form.email}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                                        placeholder="john@example.com"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        Phone
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        value={form.phone}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                                        placeholder="+1 (555) 000-0000"
-                                    />
-                                </div>
-                                <div className="sm:col-span-2">
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        Address
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="address"
-                                        value={form.address}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                                        placeholder="123 Main Street"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        City
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="city"
-                                        value={form.city}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                                        placeholder="New York"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        ZIP Code
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="zipCode"
-                                        value={form.zipCode}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                                        placeholder="10001"
-                                    />
-                                </div>
-                                <div className="sm:col-span-2">
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        Country
-                                    </label>
+                                ))
+                                }
+                                    <div className="col-span-2">
                                     <select
                                         name="country"
-                                        value={form.country}
-                                        onChange={handleChange}
+                                        {...register("country")}
                                         className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
                                     >
                                         <option value="">Select country</option>
@@ -215,6 +128,7 @@ export default function CheckoutPage() {
                                         <option value="FR">France</option>
                                         <option value="AU">Australia</option>
                                     </select>
+                                    <p className="text-sm mt-1 text-red-700">{errors.country?.message}</p>
                                 </div>
                             </div>
                         </div>

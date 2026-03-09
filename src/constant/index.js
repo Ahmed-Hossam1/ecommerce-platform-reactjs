@@ -1,0 +1,58 @@
+export const checkoutForm = [
+  {
+    id: 1,
+    name: "firstName",
+    label: "First Name",
+    type: "text",
+    placeholder: "John",
+  },
+  {
+    id: 2,
+    name: "lastName",
+    label: "Last Name",
+    type: "text",
+    placeholder: "Doe",
+  },
+  {
+    id: 3,
+    name: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "8dM5I@example.com",
+  },
+  {
+    id: 4,
+    name: "phone",
+    label: "Phone",
+    type: "text",
+    placeholder: "123-456-7890",
+  },
+  {
+    id: 5,
+    name: "address",
+    label: "Address",
+    type: "text",
+    placeholder: "123 Main St",
+  },
+  {
+    id: 6,
+    name: "city",
+    label: "City",
+    type: "text",
+    placeholder: "New York",
+  },
+  {
+    id: 7,
+    name: "state",
+    label: "State",
+    type: "text",
+    placeholder: "NY",
+  },
+  {
+    id: 8,
+    name: "zip",
+    label: "Zip",
+    type: "text",
+    placeholder: "10001",
+  },
+];
