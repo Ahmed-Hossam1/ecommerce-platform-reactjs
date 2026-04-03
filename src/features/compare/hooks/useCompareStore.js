@@ -31,6 +31,11 @@ const useCompareStore = create(persist((set, get) => ({
         toast.success("Product removed from compare");
     },
 
+    clearCompare: () => {
+        set({ items: [] });
+        toast.success("Compare list cleared");
+    },
+
     isInCompare: (productId) => {
         return get().items.some((item) => item.id === productId);
     },

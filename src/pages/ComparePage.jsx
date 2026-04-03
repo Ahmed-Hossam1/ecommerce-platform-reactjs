@@ -5,9 +5,16 @@ import useCompareStore from "../features/compare/hooks/useCompareStore";
 export default function ComparePage() {
     const [products, setProducts] = useState([]);
     const storeItems = useCompareStore((s) => s.items);
+    const clearCompare = useCompareStore((s) => s.clearCompare);
 
     const [selectedProductA, setSelectedProductA] = useState(storeItems[0] ? String(storeItems[0].id) : "");
     const [selectedProductB, setSelectedProductB] = useState(storeItems[1] ? String(storeItems[1].id) : "");
+
+    const handleClear = () => {
+        setSelectedProductA("");
+        setSelectedProductB("");
+        clearCompare();
+    };
 
     useEffect(() => {
         async function load() {
@@ -84,6 +91,21 @@ export default function ComparePage() {
                     </select>
                 </div>
             </div>
+
+            {/* Clear Compare List */}
+            {(selectedProductA || selectedProductB) && (
+                <div className="flex justify-end mb-6">
+                    <button
+                        onClick={handleClear}
+                        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 bg-red-50 rounded-xl hover:bg-red-100 transition-colors"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Clear Compare List
+                    </button>
+                </div>
+            )}
 
             {/* Comparison Table */}
             {productA || productB ? (
