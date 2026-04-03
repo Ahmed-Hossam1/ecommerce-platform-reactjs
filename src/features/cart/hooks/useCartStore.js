@@ -1,8 +1,9 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import toast from "react-hot-toast";
 
 
-const useCartStore = create((set, get) => ({
+const useCartStore = create(persist((set, get) => ({
     items: [],
 
     addToCart: (product) => {
@@ -87,7 +88,7 @@ const useCartStore = create((set, get) => ({
             0
         );
     },
-}));
+}), { name: "cart-storage" }));
 
 export default useCartStore;
 

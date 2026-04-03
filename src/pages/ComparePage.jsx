@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../features/products/services/productService";
+import useCompareStore from "../features/compare/hooks/useCompareStore";
 
 export default function ComparePage() {
     const [products, setProducts] = useState([]);
-    const [selectedProductA, setSelectedProductA] = useState("");
-    const [selectedProductB, setSelectedProductB] = useState("");
+    const storeItems = useCompareStore((s) => s.items);
+
+    const [selectedProductA, setSelectedProductA] = useState(storeItems[0] ? String(storeItems[0].id) : "");
+    const [selectedProductB, setSelectedProductB] = useState(storeItems[1] ? String(storeItems[1].id) : "");
 
     useEffect(() => {
         async function load() {

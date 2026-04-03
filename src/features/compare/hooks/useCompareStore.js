@@ -1,9 +1,10 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import toast from "react-hot-toast";
 
 const MAX_COMPARE_ITEMS = 2;
 
-const useCompareStore = create((set, get) => ({
+const useCompareStore = create(persist((set, get) => ({
     items: [],
 
     addToCompare: (product) => {
@@ -33,6 +34,6 @@ const useCompareStore = create((set, get) => ({
     isInCompare: (productId) => {
         return get().items.some((item) => item.id === productId);
     },
-}));
+}), { name: "compare-storage" }));
 
 export default useCompareStore;

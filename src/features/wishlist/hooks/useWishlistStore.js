@@ -1,7 +1,8 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import toast from "react-hot-toast";
 
-const useWishlistStore = create((set, get) => ({
+const useWishlistStore = create(persist((set, get) => ({
     items: [],
 
     addToWishlist: (product) => {
@@ -25,6 +26,6 @@ const useWishlistStore = create((set, get) => ({
     isInWishlist: (productId) => {
         return get().items.some((item) => item.id === productId);
     },
-}));
+}), { name: "wishlist-storage" }));
 
 export default useWishlistStore;
