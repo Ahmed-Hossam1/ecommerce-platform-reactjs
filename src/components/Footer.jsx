@@ -100,14 +100,14 @@ export default function Footer() {
                         >
                             Ahmed Saber
                         </a>{" "}
-                        and implemented by{" "}
+                        and implemented by
                         <a
-                            href="#"
+                            href="https://portfolio-psi-opal-14.vercel.app/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-white font-medium hover:text-primary-400 transition-colors underline decoration-gray-700 underline-offset-4"
                         >
-                            [Your Name]
+                         Ahmed Hossam
                         </a>
                     </p>
                     &copy; {new Date().getFullYear()} ShopHub. All rights reserved.

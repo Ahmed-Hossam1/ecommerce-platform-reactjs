@@ -31,7 +31,7 @@ export default function ProductsPage() {
     useEffect(() => {
         async function load() {
             setLoading(true);
-            // Currently just loads all products — students should use filterProducts()
+
                 const searchedProducts = await filterProducts({ search , category: selectedCategory , sortBy , sortOrder , limit: productsPerPage , page : currentPage  });
                 setProducts(searchedProducts.data);
                 setTotalPages(searchedProducts.totalPages);

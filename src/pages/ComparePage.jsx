@@ -17,7 +17,7 @@ export default function ComparePage() {
         load();
     }, []);
 
-    // Comparison logic not implemented — student task
+
     const productA = products.find((p) => p.id === Number(selectedProductA));
     const productB = products.find((p) => p.id === Number(selectedProductB));
 

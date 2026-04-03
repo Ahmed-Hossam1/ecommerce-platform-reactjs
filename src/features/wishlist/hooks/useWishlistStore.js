@@ -16,7 +16,7 @@ const useWishlistStore = create(persist((set, get) => ({
         toast.success(`${product.name || 'Product'} added to wishlist`);
     },
 
-    // Partial implementation — students should complete this
+
     removeFromWishlist: (productId) => {
         const items = get().items;
         set({ items: items.filter((item) => item.id !== productId) });
