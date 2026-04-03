@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import useCartStore from "../../cart/hooks/useCartStore";
 import useWishlistStore from "../../wishlist/hooks/useWishlistStore";
+import useCompareStore from "../../compare/hooks/useCompareStore";
 
 export default function ProductCard({ product }) {
     const addToCart = useCartStore((s) => s.addToCart);
     const addToWishlist = useWishlistStore((s) => s.addToWishlist);
     const removeFromWishlist = useWishlistStore((s) => s.removeFromWishlist);
     const isInWishlist = useWishlistStore((s) => s.isInWishlist(product.id));
+    const addToCompare = useCompareStore((s) => s.addToCompare);
+    const removeFromCompare = useCompareStore((s) => s.removeFromCompare);
+    const isInCompare = useCompareStore((s) => s.isInCompare(product.id));
 
     const renderStars = (rating) => {
         const stars = [];
@@ -106,13 +110,32 @@ export default function ProductCard({ product }) {
                     <span className="text-lg font-bold text-gray-900">
                         ${product.price.toFixed(2)}
                     </span>
-                    <button
-                        onClick={() => addToCart(product)}
-                        disabled={product.stock === 0}
-                        className="px-3 py-1.5 bg-primary-600 text-white text-xs font-medium rounded-lg hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
-                    >
-                        Add to Cart
-                    </button>
+                    <div className="flex items-center gap-1.5">
+                        <button
+                            onClick={() =>
+                                isInCompare
+                                    ? removeFromCompare(product.id)
+                                    : addToCompare(product)
+                            }
+                            title={isInCompare ? "Remove from Compare" : "Add to Compare"}
+                            className={`p-1.5 rounded-lg border-2 transition-all duration-200 ${
+                                isInCompare
+                                    ? "border-primary-500 bg-primary-50 text-primary-600"
+                                    : "border-gray-200 text-gray-400 hover:border-primary-300 hover:text-primary-500"
+                            }`}
+                        >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                            </svg>
+                        </button>
+                        <button
+                            onClick={() => addToCart(product)}
+                            disabled={product.stock === 0}
+                            className="px-3 py-1.5 bg-primary-600 text-white text-xs font-medium rounded-lg hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

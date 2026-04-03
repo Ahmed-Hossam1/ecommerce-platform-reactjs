@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import useCartStore from "../features/cart/hooks/useCartStore";
+import useCompareStore from "../features/compare/hooks/useCompareStore";
 
 export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const items = useCartStore((s) => s.items);
     const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+    const compareCount = useCompareStore((s) => s.items.length);
 
     const links = [
         { to: "/", label: "Home" },
@@ -34,9 +36,14 @@ export default function Navbar() {
                             <Link
                                 key={link.to}
                                 to={link.to}
-                                className="px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
+                                className="relative px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
                             >
                                 {link.label}
+                                {link.label === "Compare" && compareCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 bg-primary-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                                        {compareCount}
+                                    </span>
+                                )}
                             </Link>
                         ))}
                     </div>
@@ -81,9 +88,14 @@ export default function Navbar() {
                                 key={link.to}
                                 to={link.to}
                                 onClick={() => setMobileOpen(false)}
-                                className="block px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:text-primary-600 hover:bg-primary-50 transition-all"
+                                className="relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:text-primary-600 hover:bg-primary-50 transition-all"
                             >
                                 {link.label}
+                                {link.label === "Compare" && compareCount > 0 && (
+                                    <span className="bg-primary-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                                        {compareCount}
+                                    </span>
+                                )}
                             </Link>
                         ))}
                     </div>

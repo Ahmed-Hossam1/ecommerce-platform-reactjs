@@ -19,11 +19,21 @@ export default function ComparePage() {
     const productB = products.find((p) => p.id === Number(selectedProductB));
 
     const comparisonFields = [
-        { label: "Price", key: "price", format: (v) => `$${v?.toFixed(2) || "—"}` },
-        { label: "Category", key: "category", format: (v) => v || "—" },
-        { label: "Rating", key: "rating", format: (v) => (v ? `${v} / 5` : "—") },
-        { label: "Stock", key: "stock", format: (v) => (v != null ? `${v} units` : "—") },
+        { label: "Price", key: "price", format: (v) => `$${v?.toFixed(2) || "—"}`, betterWhen: "lower" },
+        { label: "Rating", key: "rating", format: (v) => (v ? `${v} / 5` : "—"), betterWhen: "higher" },
+        { label: "Stock", key: "stock", format: (v) => (v != null ? `${v} units` : "—"), betterWhen: "higher" },
+        { label: "Category", key: "category", format: (v) => v || "—", betterWhen: null },
     ];
+
+    // Returns "a", "b", or "tie" — or null if we can't compare
+    const getWinner = (field) => {
+        if (!productA || !productB || !field.betterWhen) return null;
+        const valA = productA[field.key];
+        const valB = productB[field.key];
+        if (valA === valB) return "tie";
+        if (field.betterWhen === "lower") return valA < valB ? "a" : "b";
+        return valA > valB ? "a" : "b";
+    };
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -119,22 +129,30 @@ export default function ComparePage() {
                     </div>
 
                     {/* Comparison Rows */}
-                    {comparisonFields.map((field) => (
-                        <div
-                            key={field.key}
-                            className="grid grid-cols-3 border-b border-gray-50 last:border-0"
-                        >
-                            <div className="p-4 bg-gray-50 text-sm font-medium text-gray-600">
-                                {field.label}
+                    {comparisonFields.map((field) => {
+                        const winner = getWinner(field);
+
+                        const base = "transition-colors duration-200";
+                        const classA = winner === "a"? `${base} bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200`: winner === "b"? `${base} bg-rose-50 text-rose-600`: `${base} bg-gray-50 text-gray-700`;
+                        const classB = winner === "b"? `${base} bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200`: winner === "a"? `${base} bg-rose-50 text-rose-600`: `${base} bg-gray-50 text-gray-700`;
+
+                        return (
+                            <div
+                                key={field.key}
+                                className="grid grid-cols-3 border-b border-gray-50 last:border-0"
+                            >
+                                <div className="p-4 bg-gray-50 text-sm font-medium text-gray-600">
+                                    {field.label}
+                                </div>
+                                <div className={`p-4 text-center text-sm border-l border-gray-100 ${classA}`}>
+                                    {productA ? field.format(productA[field.key]) : "—"}
+                                </div>
+                                <div className={`p-4 text-center text-sm border-l border-gray-100 ${classB}`}>
+                                    {productB ? field.format(productB[field.key]) : "—"}
+                                </div>
                             </div>
-                            <div className="p-4 text-center text-sm text-gray-800 border-l border-gray-100">
-                                {productA ? field.format(productA[field.key]) : "—"}
-                            </div>
-                            <div className="p-4 text-center text-sm text-gray-800 border-l border-gray-100">
-                                {productB ? field.format(productB[field.key]) : "—"}
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
 
                     {/* Description */}
                     <div className="grid grid-cols-3 border-t border-gray-100">

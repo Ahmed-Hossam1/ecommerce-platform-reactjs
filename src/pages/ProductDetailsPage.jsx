@@ -4,6 +4,7 @@ import { getProductById } from "../features/products/services/productService";
 import useCartStore from "../features/cart/hooks/useCartStore";
 import useWishlistStore from "../features/wishlist/hooks/useWishlistStore";
 import ProductReviews from "../features/products/components/ProductReviews";
+import useCompareStore from "../features/compare/hooks/useCompareStore";
 
 export default function ProductDetailsPage() {
     const { id } = useParams();
@@ -14,6 +15,9 @@ export default function ProductDetailsPage() {
     const addToWishlist = useWishlistStore((s) => s.addToWishlist);
     const removeFromWishlist = useWishlistStore((s) => s.removeFromWishlist);
     const isInWishlist = useWishlistStore((s) => s.isInWishlist(Number(id)));
+    const addToCompare = useCompareStore((s) => s.addToCompare);
+    const removeFromCompare = useCompareStore((s) => s.removeFromCompare);
+    const isInCompare = useCompareStore((s) => s.isInCompare(Number(id)));
 
     useEffect(() => {
         async function load() {
@@ -231,6 +235,23 @@ export default function ProductDetailsPage() {
                                     d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
                                     clipRule="evenodd"
                                 />
+                            </svg>
+                        </button>
+                        <button
+                            onClick={() =>
+                                isInCompare
+                                    ? removeFromCompare(product.id)
+                                    : addToCompare(product)
+                            }
+                            className={`px-4 py-3.5 rounded-xl border-2 transition-all ${
+                                isInCompare
+                                    ? "border-primary-500 bg-primary-50 text-primary-600"
+                                    : "border-gray-200 text-gray-400 hover:border-primary-300 hover:text-primary-500"
+                            }`}
+                            title={isInCompare ? "Remove from Compare" : "Add to Compare"}
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
                             </svg>
                         </button>
                     </div>
