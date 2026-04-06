@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { getProducts, getCategories } from "../features/products/services/productService";
 import ProductCard from "../features/products/components/ProductCard";
 import SkeletonLoader from "../components/Skeleton";
+import { useTranslation } from "react-i18next";
 
 export default function HomePage() {
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
+      const { t } = useTranslation();
 
     useEffect(() => {
         async function load() {
@@ -48,6 +50,7 @@ export default function HomePage() {
                             <span className="block bg-linear-to-r from-primary-200 to-accent-400 bg-clip-text text-transparent">
                                 You&apos;ll Love
                             </span>
+                            <h2>{t("Welcome to React")}</h2>
                         </h1>
                         <p className="text-lg text-primary-100 mb-8 leading-relaxed max-w-lg">
                             Shop curated collections of premium products. From cutting-edge
