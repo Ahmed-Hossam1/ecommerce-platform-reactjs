@@ -1,0 +1,37 @@
+{
+  "navbar": {
+    "home": "Home",
+    "products": "Products",
+    "wishlist": "Wishlist",
+    "compare": "Compare",
+    "cart": "Cart"
+  },
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "subscribe": "Subscribe",
+    "shopNow": "Shop Now",
+    "viewAll": "View All",
+    "addToCart": "Add to Cart",
+    "removeFromCart": "Remove",
+    "checkout": "Checkout",
+    "continueShopping": "Continue Shopping",
+    "changeToEnglish": "English",
+    "changeToArabic": "العربية"
+  },
+  "footer": {
+    "brandDescription": "Your one-stop shop for premium products. Quality, speed, and satisfaction guaranteed.",
+    "quickLinks": "Quick Links",
+    "allProducts": "All Products",
+    "shoppingCart": "Shopping Cart",
+    "customerService": "Customer Service",
+    "contactUs": "Contact Us",
+    "shippingPolicy": "Shipping Policy",
+    "returnsExchanges": "Returns & Exchanges",
+    "faq": "FAQ",
+    "stayUpdated": "Stay Updated",
+    "newsletterText": "Subscribe to our newsletter for the latest deals.",
+    "emailPlaceholder": "your@email.com",
+    "copyright": "© {{year}} ShopHub. All rights reserved."
+  }
+}

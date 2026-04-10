@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "badge": "✨ New Collection Available",
+    "title": "Discover Products",
+    "highlight": "You'll Love",
+    "description": "Shop curated collections of premium products. From cutting-edge electronics to timeless fashion — all with fast shipping and hassle-free returns.",
+    "shop": "Shop Now",
+    "browse": "Browse Categories",
+    "changeEn": "Change to English",
+    "changeAr": "Change to Arabic"
+  },
+  "stats": {
+    "products": "Products",
+    "categories": "Categories",
+    "shipping": "Free Shipping",
+    "support": "24/7 Support"
+  },
+  "categories": {
+    "title": "Shop by Category",
+    "description": "Browse our curated collection organized by category to find exactly what you need."
+  },
+  "products": {
+    "title": "Top Rated Products",
+    "description": "Our highest-rated products loved by customers",
+    "viewAll": "View All"
+  },
+  "newsletter": {
+    "title": "Don't Miss Out on Deals",
+    "description": "Subscribe and get 15% off your first order plus exclusive access to new arrivals and special promotions.",
+    "placeholder": "Enter your email",
+    "button": "Subscribe"
+  },
+  "welcome": "Welcome {{name}}"
+}

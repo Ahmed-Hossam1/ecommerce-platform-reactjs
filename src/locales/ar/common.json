@@ -1,0 +1,37 @@
+{
+  "navbar": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "wishlist": "المفضلة",
+    "compare": "المقارنة",
+    "cart": "السلة"
+  },
+  "buttons": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "subscribe": "اشترك",
+    "shopNow": "تسوق الآن",
+    "viewAll": "عرض الكل",
+    "addToCart": "أضف إلى السلة",
+    "removeFromCart": "إزالة",
+    "checkout": "إتمام الشراء",
+    "continueShopping": "متابعة التسوق",
+    "changeToEnglish": "English",
+    "changeToArabic": "العربية"
+  },
+  "footer": {
+    "brandDescription": "وجهتك الأولى للمنتجات المميزة. الجودة والسرعة والرضا مضمون.",
+    "quickLinks": "روابط سريعة",
+    "allProducts": "جميع المنتجات",
+    "shoppingCart": "سلة التسوق",
+    "customerService": "خدمة العملاء",
+    "contactUs": "اتصل بنا",
+    "shippingPolicy": "سياسة الشحن",
+    "returnsExchanges": "الإرجاع والاستبدال",
+    "faq": "الأسئلة الشائعة",
+    "stayUpdated": "ابقَ على اطلاع",
+    "newsletterText": "اشترك في نشرتنا الإخبارية لأحدث العروض.",
+    "emailPlaceholder": "بريدك@الإلكتروني.com",
+    "copyright": "© {{year}} شوب هاب. جميع الحقوق محفوظة."
+  }
+}
