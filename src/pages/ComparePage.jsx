@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../features/products/services/productService";
 import useCompareStore from "../features/compare/hooks/useCompareStore";
+import { useTranslation } from "react-i18next";
 
 export default function ComparePage() {
+    const { t } = useTranslation("compare");
     const [products, setProducts] = useState([]);
     const storeItems = useCompareStore((s) => s.items);
     const clearCompare = useCompareStore((s) => s.clearCompare);
@@ -29,10 +31,10 @@ export default function ComparePage() {
     const productB = products.find((p) => p.id === Number(selectedProductB));
 
     const comparisonFields = [
-        { label: "Price", key: "price", format: (v) => `$${v?.toFixed(2) || "—"}`, betterWhen: "lower" },
-        { label: "Rating", key: "rating", format: (v) => (v ? `${v} / 5` : "—"), betterWhen: "higher" },
-        { label: "Stock", key: "stock", format: (v) => (v != null ? `${v} units` : "—"), betterWhen: "higher" },
-        { label: "Category", key: "category", format: (v) => v || "—", betterWhen: null },
+        { label: t("price"), key: "price", format: (v) => `$${v?.toFixed(2) || "—"}`, betterWhen: "lower" },
+        { label: t("rating"), key: "rating", format: (v) => (v ? `${v} / 5` : "—"), betterWhen: "higher" },
+        { label: t("stock"), key: "stock", format: (v) => (v != null ? `${v} ${t("units")}` : "—"), betterWhen: "higher" },
+        { label: t("category"), key: "category", format: (v) => v || "—", betterWhen: null },
     ];
 
     // Returns "a", "b", or "tie" — or null if we can't compare
@@ -48,9 +50,9 @@ export default function ComparePage() {
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900">Compare Products</h1>
+                <h1 className="text-3xl font-bold text-gray-900">{t("title")}</h1>
                 <p className="text-gray-500 mt-1">
-                    Select two products to compare them side by side
+                    {t("subtitle")}
                 </p>
             </div>
 
@@ -58,14 +60,14 @@ export default function ComparePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Product A
+                        {t("productA")}
                     </label>
                     <select
                         value={selectedProductA}
                         onChange={(e) => setSelectedProductA(e.target.value)}
                         className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
                     >
-                        <option value="">Select a product...</option>
+                        <option value="">{t("selectProduct")}</option>
                         {products.map((p) => (
                             <option key={p.id} value={p.id}>
                                 {p.title}
@@ -75,14 +77,14 @@ export default function ComparePage() {
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Product B
+                        {t("productB")}
                     </label>
                     <select
                         value={selectedProductB}
                         onChange={(e) => setSelectedProductB(e.target.value)}
                         className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
                     >
-                        <option value="">Select a product...</option>
+                        <option value="">{t("selectProduct")}</option>
                         {products.map((p) => (
                             <option key={p.id} value={p.id}>
                                 {p.title}
@@ -102,7 +104,7 @@ export default function ComparePage() {
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
-                        Clear Compare List
+                        {t("clearCompareList")}
                     </button>
                 </div>
             )}
@@ -113,7 +115,7 @@ export default function ComparePage() {
                     {/* Product Headers */}
                     <div className="grid grid-cols-3 border-b border-gray-100">
                         <div className="p-4 bg-gray-50 font-medium text-sm text-gray-500">
-                            Feature
+                            {t("feature")}
                         </div>
                         <div className="p-4 text-center border-l border-gray-100">
                             {productA ? (
@@ -129,7 +131,7 @@ export default function ComparePage() {
                                 </div>
                             ) : (
                                 <p className="text-sm text-gray-400 py-8">
-                                    Select Product A
+                                    {t("selectProductA")}
                                 </p>
                             )}
                         </div>
@@ -147,7 +149,7 @@ export default function ComparePage() {
                                 </div>
                             ) : (
                                 <p className="text-sm text-gray-400 py-8">
-                                    Select Product B
+                                    {t("selectProductB")}
                                 </p>
                             )}
                         </div>
@@ -182,7 +184,7 @@ export default function ComparePage() {
                     {/* Description */}
                     <div className="grid grid-cols-3 border-t border-gray-100">
                         <div className="p-4 bg-gray-50 text-sm font-medium text-gray-600">
-                            Description
+                            {t("description")}
                         </div>
                         <div className="p-4 text-sm text-gray-600 border-l border-gray-100 leading-relaxed">
                             {productA?.description || "—"}
@@ -208,11 +210,10 @@ export default function ComparePage() {
                         />
                     </svg>
                     <h3 className="text-lg font-semibold text-gray-700 mb-2">
-                        Select Products to Compare
+                        {t("selectToCompareTitle")}
                     </h3>
                     <p className="text-gray-400 text-sm max-w-sm mx-auto">
-                        Choose two products from the dropdowns above to see a detailed
-                        side-by-side comparison.
+                        {t("selectToCompareDesc")}
                     </p>
                 </div>
             )}

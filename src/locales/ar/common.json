@@ -33,5 +33,11 @@
     "newsletterText": "اشترك في نشرتنا الإخبارية لأحدث العروض.",
     "emailPlaceholder": "بريدك@الإلكتروني.com",
     "copyright": "© {{year}} شوب هاب. جميع الحقوق محفوظة."
+  },
+  "productCard": {
+    "onlyLeft": "باقي {{stock}} فقط",
+    "outOfStock": "نفذت الكمية",
+    "removeFromCompare": "إزالة من المقارنة",
+    "addToCompare": "أضف للمقارنة"
   }
 }

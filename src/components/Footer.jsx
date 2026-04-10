@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+    const { t } = useTranslation("common");
     return (
         <footer className="bg-gray-900 text-gray-300 mt-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -14,20 +16,19 @@ export default function Footer() {
                             <span className="text-xl font-bold text-white">ShopHub</span>
                         </Link>
                         <p className="text-sm text-gray-400 leading-relaxed">
-                            Your one-stop shop for premium products. Quality, speed, and
-                            satisfaction guaranteed.
+                            {t("footer.brandDescription")}
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+                        <h4 className="text-white font-semibold mb-4">{t("footer.quickLinks")}</h4>
                         <ul className="space-y-2">
                             {[
-                                { to: "/products", label: "All Products" },
-                                { to: "/cart", label: "Shopping Cart" },
-                                { to: "/wishlist", label: "Wishlist" },
-                                { to: "/compare", label: "Compare" },
+                                { to: "/products", label: t("footer.allProducts") },
+                                { to: "/cart", label: t("footer.shoppingCart") },
+                                { to: "/wishlist", label: t("navbar.wishlist") },
+                                { to: "/compare", label: t("navbar.compare") },
                             ].map((link) => (
                                 <li key={link.to}>
                                     <Link
@@ -43,29 +44,29 @@ export default function Footer() {
 
                     {/* Customer Service */}
                     <div>
-                        <h4 className="text-white font-semibold mb-4">Customer Service</h4>
+                        <h4 className="text-white font-semibold mb-4">{t("footer.customerService")}</h4>
                         <ul className="space-y-2 text-sm text-gray-400">
-                            <li>Contact Us</li>
-                            <li>Shipping Policy</li>
-                            <li>Returns & Exchanges</li>
-                            <li>FAQ</li>
+                            <li>{t("footer.contactUs")}</li>
+                            <li>{t("footer.shippingPolicy")}</li>
+                            <li>{t("footer.returnsExchanges")}</li>
+                            <li>{t("footer.faq")}</li>
                         </ul>
                     </div>
 
                     {/* Newsletter */}
                     <div>
-                        <h4 className="text-white font-semibold mb-4">Stay Updated</h4>
+                        <h4 className="text-white font-semibold mb-4">{t("footer.stayUpdated")}</h4>
                         <p className="text-sm text-gray-400 mb-3">
-                            Subscribe to our newsletter for the latest deals.
+                            {t("footer.newsletterText")}
                         </p>
                         <div className="flex">
                             <input
                                 type="email"
-                                placeholder="your@email.com"
+                                placeholder={t("footer.emailPlaceholder")}
                                 className="w-full flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-primary-500"
                             />
                             <button className="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-r-lg hover:bg-primary-700 transition-colors">
-                                Subscribe
+                                {t("buttons.subscribe")}
                             </button>
                         </div>
                     </div>
@@ -110,7 +111,7 @@ export default function Footer() {
                          Ahmed Hossam
                         </a>
                     </p>
-                    &copy; {new Date().getFullYear()} ShopHub. All rights reserved.
+                    {t("footer.copyright", { year: new Date().getFullYear() })}
                 </div>
             </div>
         </footer>

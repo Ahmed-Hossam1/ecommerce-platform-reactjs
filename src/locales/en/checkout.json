@@ -1,0 +1,39 @@
+{
+  "orderPlacedTitle": "Order Placed Successfully!",
+  "orderPlacedDesc": "Thank you for your purchase. Your order has been confirmed and will be shipped shortly.",
+  "emptyCartDescCheckout": "Add some items to your cart before checking out.",
+  "browseProducts": "Browse Products",
+  "title": "Checkout",
+  "subtitle": "Complete your order by filling in the details below",
+  "shippingInfo": "Shipping Information",
+  "yourOrder": "Your Order",
+  "qty": "Qty: {{count}}",
+  "placeOrder": "Place Order",
+  "selectCountry": "Select country",
+  "countries": {
+    "US": "United States",
+    "CA": "Canada",
+    "UK": "United Kingdom",
+    "DE": "Germany",
+    "FR": "France",
+    "AU": "Australia"
+  },
+  "form": {
+    "firstNameLabel": "First Name",
+    "firstNamePlaceholder": "John",
+    "lastNameLabel": "Last Name",
+    "lastNamePlaceholder": "Doe",
+    "emailLabel": "Email",
+    "emailPlaceholder": "user@example.com",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "123-456-7890",
+    "addressLabel": "Address",
+    "addressPlaceholder": "123 Main St",
+    "cityLabel": "City",
+    "cityPlaceholder": "New York",
+    "stateLabel": "State",
+    "statePlaceholder": "NY",
+    "zipLabel": "Zip",
+    "zipPlaceholder": "10001"
+  }
+}

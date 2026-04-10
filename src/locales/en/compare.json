@@ -1,0 +1,19 @@
+{
+  "title": "Compare Products",
+  "subtitle": "Select two products to compare them side by side",
+  "productA": "Product A",
+  "productB": "Product B",
+  "selectProduct": "Select a product...",
+  "clearCompareList": "Clear Compare List",
+  "feature": "Feature",
+  "selectProductA": "Select Product A",
+  "selectProductB": "Select Product B",
+  "price": "Price",
+  "rating": "Rating",
+  "stock": "Stock",
+  "category": "Category",
+  "units": "units",
+  "description": "Description",
+  "selectToCompareTitle": "Select Products to Compare",
+  "selectToCompareDesc": "Choose two products from the dropdowns above to see a detailed side-by-side comparison."
+}

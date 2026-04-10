@@ -4,8 +4,10 @@ import ProductCard from "../features/products/components/ProductCard";
 import { filterProducts, getCategories } from "../features/products/services/productService";
 import { useSearchParams } from "react-router-dom";
 import SkeletonLoader from "../components/Skeleton";
+import { useTranslation } from "react-i18next";
 
 export default function ProductsPage() {
+    const { t } = useTranslation("products");
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -54,9 +56,9 @@ export default function ProductsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Header */}
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">All Products</h1>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">{t("title")}</h1>
                 <p className="text-gray-500">
-                    Browse our collection of {products.length} premium products
+                    {t("subtitle", { count: products.length })}
                 </p>
             </div>
 
@@ -80,7 +82,7 @@ export default function ProductsPage() {
                         </svg>
                         <input
                             type="text"
-                            placeholder="Search products..."
+                            placeholder={t("searchPlaceholder")}
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
@@ -93,7 +95,7 @@ export default function ProductsPage() {
                         onChange={(e) => setSelectedCategory(e.target.value)}
                         className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
                     >
-                        <option value="">All Categories</option>
+                        <option value="">{t("allCategories")}</option>
                         {categories.map((cat) => (
                             <option key={cat} value={cat}>
                                 {cat}
@@ -111,11 +113,11 @@ export default function ProductsPage() {
                         }}
                         className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
                     >
-                        <option value="title-asc">Name: A → Z</option>
-                        <option value="title-desc">Name: Z → A</option>
-                        <option value="price-asc">Price: Low → High</option>
-                        <option value="price-desc">Price: High → Low</option>
-                        <option value="rating-desc">Rating: Best First</option>
+                        <option value="title-asc">{t("sortNameAZ")}</option>
+                        <option value="title-desc">{t("sortNameZA")}</option>
+                        <option value="price-asc">{t("sortPriceLow")}</option>
+                        <option value="price-desc">{t("sortPriceHigh")}</option>
+                        <option value="rating-desc">{t("sortRatingBest")}</option>
                     </select>
                 </div>
             </div>
@@ -148,7 +150,7 @@ export default function ProductsPage() {
                                     d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
                                 />
                             </svg>
-                            <p className="text-gray-500 text-lg">No products found</p>
+                            <p className="text-gray-500 text-lg">{t("noProductsFound")}</p>
                         </div>
                     )}
 
@@ -160,7 +162,7 @@ export default function ProductsPage() {
                                 disabled={currentPage === 1}
                                 className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                             >
-                                Previous
+                                {t("previous")}
                             </button>
                             {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                                 (pageNum) => (
@@ -183,7 +185,7 @@ export default function ProductsPage() {
                                 disabled={currentPage === totalPages}
                                 className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                             >
-                                Next
+                                {t("next")}
                             </button>
                         </div>
                     )}

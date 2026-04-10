@@ -1,0 +1,9 @@
+{
+  "emptyWishlistTitle": "قائمة المفضلة فارغة",
+  "emptyWishlistDesc": "احفظ العناصر التي تحبها بالنقر على أيقونة القلب في أي منتج.",
+  "browseProducts": "تصفح المنتجات",
+  "title": "المفضلة",
+  "itemsSaved": "عنصر واحد محفوظ",
+  "itemsSaved_plural": "{{count}} عناصر محفوظة",
+  "moveToCart": "انقل إلى السلة"
+}

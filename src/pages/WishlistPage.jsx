@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import useWishlistStore from "../features/wishlist/hooks/useWishlistStore";
 import useCartStore from "../features/cart/hooks/useCartStore";
+import { useTranslation } from "react-i18next";
 
 export default function WishlistPage() {
+    const { t } = useTranslation("wishlist");
     const items = useWishlistStore((s) => s.items);
     const removeFromWishlist = useWishlistStore((s) => s.removeFromWishlist);
     const addToCart = useCartStore((s) => s.addToCart);
@@ -23,16 +25,16 @@ export default function WishlistPage() {
                     />
                 </svg>
                 <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                    Your wishlist is empty
+                    {t("emptyWishlistTitle")}
                 </h2>
                 <p className="text-gray-500 mb-6">
-                    Save items you love by clicking the heart icon on any product.
+                    {t("emptyWishlistDesc")}
                 </p>
                 <Link
                     to="/products"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
                 >
-                    Browse Products
+                    {t("browseProducts")}
                 </Link>
             </div>
         );
@@ -41,9 +43,9 @@ export default function WishlistPage() {
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900">Wishlist</h1>
+                <h1 className="text-3xl font-bold text-gray-900">{t("title")}</h1>
                 <p className="text-gray-500 mt-1">
-                    {items.length} item{items.length !== 1 ? "s" : ""} saved
+                    {t("itemsSaved", { count: items.length })}
                 </p>
             </div>
 
@@ -81,7 +83,7 @@ export default function WishlistPage() {
                                     }}
                                     className="flex-1 py-2 bg-primary-600 text-white text-xs font-medium rounded-lg hover:bg-primary-700 transition-colors"
                                 >
-                                    Move to Cart
+                                    {t("moveToCart")}
                                 </button>
                                 <button
                                     onClick={() => removeFromWishlist(item.id)}

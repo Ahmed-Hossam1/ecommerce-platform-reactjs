@@ -5,8 +5,10 @@ import useCartStore from "../features/cart/hooks/useCartStore";
 import useWishlistStore from "../features/wishlist/hooks/useWishlistStore";
 import ProductReviews from "../features/products/components/ProductReviews";
 import useCompareStore from "../features/compare/hooks/useCompareStore";
+import { useTranslation } from "react-i18next";
 
 export default function ProductDetailsPage() {
+    const { t } = useTranslation(["products", "common"]);
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -96,13 +98,13 @@ export default function ProductDetailsPage() {
         return (
             <div className="max-w-7xl mx-auto px-4 py-16 text-center">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                    Product Not Found
+                    {t("products:notFoundTitle")}
                 </h2>
                 <Link
                     to="/products"
                     className="text-primary-600 hover:text-primary-700 font-medium"
                 >
-                    ← Back to Products
+                    {t("products:backToProducts")}
                 </Link>
             </div>
         );
@@ -115,14 +117,14 @@ export default function ProductDetailsPage() {
             {/* Breadcrumb */}
             <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
                 <Link to="/" className="hover:text-primary-600 transition-colors">
-                    Home
+                    {t("products:breadcrumbHome")}
                 </Link>
                 <span>/</span>
                 <Link
                     to="/products"
                     className="hover:text-primary-600 transition-colors"
                 >
-                    Products
+                    {t("products:breadcrumbProducts")}
                 </Link>
                 <span>/</span>
                 <span className="text-gray-800 font-medium truncate">
@@ -153,7 +155,7 @@ export default function ProductDetailsPage() {
                     <div className="flex items-center gap-2 mb-4">
                         <div className="flex">{renderStars(product.rating)}</div>
                         <span className="text-sm text-gray-500">
-                            ({product.rating} rating)
+                            ({product.rating} {t("products:rating")})
                         </span>
                     </div>
 
@@ -166,14 +168,14 @@ export default function ProductDetailsPage() {
                     {time && (
                         <div className="bg-linear-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-4 mb-6">
                             <p className="text-sm font-medium text-amber-800 mb-3">
-                                🔥 Limited Time Offer — Ends In:
+                                {t("products:limitedOffer")}
                             </p>
                             <div className="flex gap-3">
                                 {[
-                                    { value: time.days, label: "Days" },
-                                    { value: time.hours, label: "Hours" },
-                                    { value: time.minutes, label: "Min" },
-                                    { value: time.seconds, label: "Sec" },
+                                    { value: time.days, label: t("products:days") },
+                                    { value: time.hours, label: t("products:hours") },
+                                    { value: time.minutes, label: t("products:min") },
+                                    { value: time.seconds, label: t("products:sec") },
                                 ].map((unit) => (
                                     <div
                                         key={unit.label}
@@ -206,10 +208,10 @@ export default function ProductDetailsPage() {
                         />
                         <span className="text-sm text-gray-600">
                             {product.stock > 10
-                                ? "In Stock"
+                                ? t("products:inStock")
                                 : product.stock > 0
-                                    ? `Only ${product.stock} left`
-                                    : "Out of Stock"}
+                                    ? t("products:onlyLeft", { stock: product.stock })
+                                    : t("products:outOfStock")}
                         </span>
                     </div>
 
@@ -220,7 +222,7 @@ export default function ProductDetailsPage() {
                             disabled={product.stock === 0}
                             className="flex-1 px-6 py-3.5 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                         >
-                            Add to Cart
+                            {t("common:buttons.addToCart")}
                         </button>
                         <button
                             onClick={() => isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product)}
@@ -248,7 +250,7 @@ export default function ProductDetailsPage() {
                                     ? "border-primary-500 bg-primary-50 text-primary-600"
                                     : "border-gray-200 text-gray-400 hover:border-primary-300 hover:text-primary-500"
                             }`}
-                            title={isInCompare ? "Remove from Compare" : "Add to Compare"}
+                            title={isInCompare ? t("common:productCard.removeFromCompare") : t("common:productCard.addToCompare")}
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />

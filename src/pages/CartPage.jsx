@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import useCartStore from "../features/cart/hooks/useCartStore";
+import { useTranslation } from "react-i18next";
 
 export default function CartPage() {
+    const { t } = useTranslation(["cart", "common"]);
     const items = useCartStore((s) => s.items);
     const updateQuantity = useCartStore((s) => s.updateQuantity);
     const removeFromCart = useCartStore((s) => s.removeFromCart);
@@ -30,16 +32,16 @@ export default function CartPage() {
                     />
                 </svg>
                 <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                    Your cart is empty
+                    {t("cart:emptyCartTitle")}
                 </h2>
                 <p className="text-gray-500 mb-6">
-                    Looks like you haven&apos;t added any items yet.
+                    {t("cart:emptyCartDesc")}
                 </p>
                 <Link
                     to="/products"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
                 >
-                    Start Shopping
+                    {t("cart:startShopping")}
                 </Link>
             </div>
         );
@@ -49,16 +51,16 @@ export default function CartPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="flex items-center justify-between mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
+                    <h1 className="text-3xl font-bold text-gray-900">{t("cart:title")}</h1>
                     <p className="text-gray-500 mt-1">
-                        {totalItems} item{totalItems !== 1 ? "s" : ""} in your cart
+                        {t("cart:itemsInCart", { count: totalItems })}
                     </p>
                 </div>
                 <button
                     onClick={clearCart}
                     className="text-sm text-red-500 hover:text-red-600 font-medium transition-colors"
                 >
-                    Clear All
+                    {t("cart:clearAll")}
                 </button>
             </div>
 
@@ -150,23 +152,23 @@ export default function CartPage() {
                 <div className="lg:col-span-1">
                     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-24">
                         <h3 className="text-lg font-bold text-gray-900 mb-4">
-                            Order Summary
+                            {t("cart:orderSummary")}
                         </h3>
                         <div className="space-y-3 mb-6">
                             <div className="flex justify-between text-sm text-gray-600">
-                                <span>Subtotal ({totalItems} items)</span>
+                                <span>{t("cart:subtotal", { count: totalItems })}</span>
                                 <span>${totalPrice.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between text-sm text-gray-600">
-                                <span>Shipping</span>
-                                <span className="text-emerald-600 font-medium">Free</span>
+                                <span>{t("cart:shipping")}</span>
+                                <span className="text-emerald-600 font-medium">{t("cart:free")}</span>
                             </div>
                             <div className="flex justify-between text-sm text-gray-600">
-                                <span>Tax</span>
+                                <span>{t("cart:tax")}</span>
                                 <span>${(totalPrice * 0.08).toFixed(2)}</span>
                             </div>
                             <div className="border-t border-gray-100 pt-3 flex justify-between">
-                                <span className="font-bold text-gray-900">Total</span>
+                                <span className="font-bold text-gray-900">{t("cart:total")}</span>
                                 <span className="font-bold text-gray-900 text-lg">
                                     ${(totalPrice * 1.08).toFixed(2)}
                                 </span>
@@ -176,13 +178,13 @@ export default function CartPage() {
                             to="/checkout"
                             className="block w-full py-3.5 bg-primary-600 text-white text-center font-semibold rounded-xl hover:bg-primary-700 transition-colors"
                         >
-                            Proceed to Checkout
+                            {t("cart:proceedToCheckout")}
                         </Link>
                         <Link
                             to="/products"
                             className="block w-full mt-3 py-3 text-center text-sm text-primary-600 font-medium hover:text-primary-700 transition-colors"
                         >
-                            Continue Shopping
+                            {t("common:buttons.continueShopping")}
                         </Link>
                     </div>
                 </div>

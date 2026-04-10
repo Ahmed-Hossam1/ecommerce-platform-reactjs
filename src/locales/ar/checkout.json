@@ -1,0 +1,39 @@
+{
+  "orderPlacedTitle": "تم الطلب بنجاح!",
+  "orderPlacedDesc": "شكرًا لشرائك. تم تأكيد طلبك وسيتم شحنه قريبًا.",
+  "emptyCartDescCheckout": "أضف بعض العناصر إلى سلتك قبل إتمام الشراء.",
+  "browseProducts": "تصفح المنتجات",
+  "title": "إتمام الشراء",
+  "subtitle": "أكمل طلبك من خلال ملء التفاصيل أدناه",
+  "shippingInfo": "معلومات الشحن",
+  "yourOrder": "طلبك",
+  "qty": "الكمية: {{count}}",
+  "placeOrder": "تأكيد الطلب",
+  "selectCountry": "اختر الدولة",
+  "countries": {
+    "US": "الولايات المتحدة",
+    "CA": "كندا",
+    "UK": "المملكة المتحدة",
+    "DE": "ألمانيا",
+    "FR": "فرنسا",
+    "AU": "أستراليا"
+  },
+  "form": {
+    "firstNameLabel": "الاسم الأول",
+    "firstNamePlaceholder": "أحمد",
+    "lastNameLabel": "اسم العائلة",
+    "lastNamePlaceholder": "محمد",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "user@example.com",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "0123456789",
+    "addressLabel": "العنوان",
+    "addressPlaceholder": "123 شارع رئيسي",
+    "cityLabel": "المدينة",
+    "cityPlaceholder": "القاهرة",
+    "stateLabel": "المحافظة",
+    "statePlaceholder": "القاهرة",
+    "zipLabel": "الرمز البريدي",
+    "zipPlaceholder": "11111"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "emptyCartTitle": "سلة التسوق فارغة",
+  "emptyCartDesc": "يبدو أنك لم تقم بإضافة أي عناصر بعد.",
+  "startShopping": "ابدأ التسوق",
+  "title": "سلة التسوق",
+  "itemsInCart": "عنصر واحد في سلتك",
+  "itemsInCart_plural": "{{count}} عناصر في سلتك",
+  "clearAll": "مسح الكل",
+  "orderSummary": "ملخص الطلب",
+  "subtotal": "المجموع الفرعي ({{count}} عناصر)",
+  "shipping": "الشحن",
+  "free": "مجاني",
+  "tax": "الضريبة",
+  "total": "الإجمالي",
+  "proceedToCheckout": "إتمام الشراء"
+}

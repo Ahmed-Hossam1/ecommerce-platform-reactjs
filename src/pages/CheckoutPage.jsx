@@ -5,8 +5,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { checkoutSchema } from "../schema";
 import { checkoutForm } from "../constant";
+import { useTranslation } from "react-i18next";
 
 export default function CheckoutPage() {
+    const { t } = useTranslation(["checkout", "cart"]);
     const items = useCartStore((s) => s.items);
     const clearCart = useCartStore((s) => s.clearCart);
     const [orderPlaced, setOrderPlaced] = useState(false);
@@ -44,17 +46,16 @@ export default function CheckoutPage() {
                     </svg>
                 </div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-3">
-                    Order Placed Successfully!
+                    {t("checkout:orderPlacedTitle")}
                 </h2>
                 <p className="text-gray-500 mb-8 max-w-md mx-auto">
-                    Thank you for your purchase. Your order has been confirmed and will be
-                    shipped shortly.
+                    {t("checkout:orderPlacedDesc")}
                 </p>
                 <Link
                     to="/products"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
                 >
-                    Continue Shopping
+                    {t("checkout:browseProducts")}
                 </Link>
             </div>
         );
@@ -64,16 +65,16 @@ export default function CheckoutPage() {
         return (
             <div className="max-w-7xl mx-auto px-4 py-16 text-center">
                 <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                    Your cart is empty
+                    {t("cart:emptyCartTitle")}
                 </h2>
                 <p className="text-gray-500 mb-6">
-                    Add some items to your cart before checking out.
+                    {t("checkout:emptyCartDescCheckout")}
                 </p>
                 <Link
                     to="/products"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
                 >
-                    Browse Products
+                    {t("checkout:browseProducts")}
                 </Link>
             </div>
         );
@@ -82,9 +83,9 @@ export default function CheckoutPage() {
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900">Checkout</h1>
+                <h1 className="text-3xl font-bold text-gray-900">{t("checkout:title")}</h1>
                 <p className="text-gray-500 mt-1">
-                    Complete your order by filling in the details below
+                    {t("checkout:subtitle")}
                 </p>
             </div>
 
@@ -94,21 +95,21 @@ export default function CheckoutPage() {
                     <div className="lg:col-span-2">
                         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
                             <h3 className="text-lg font-bold text-gray-900 mb-6">
-                                Shipping Information
+                                {t("checkout:shippingInfo")}
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {
                                 checkoutForm.map((input) => (
                                   <div key={input.id}>
                                     <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        {input.label}
+                                        {t(`checkout:form.${input.name}Label`, input.label)}
                                     </label>
                                     <input
                                        type={input.type}
                                        name={input.name}
                                        {...register(input.name)}
                                         className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                                        placeholder= {input.placeholder}
+                                        placeholder={t(`checkout:form.${input.name}Placeholder`, input.placeholder)}
                                     />
                                    {errors && <p className="text-sm mt-1 text-red-700">{errors[input.name]?.message}</p>} 
                                 </div>
@@ -120,13 +121,13 @@ export default function CheckoutPage() {
                                         {...register("country")}
                                         className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
                                     >
-                                        <option value="">Select country</option>
-                                        <option value="US">United States</option>
-                                        <option value="CA">Canada</option>
-                                        <option value="UK">United Kingdom</option>
-                                        <option value="DE">Germany</option>
-                                        <option value="FR">France</option>
-                                        <option value="AU">Australia</option>
+                                        <option value="">{t("checkout:selectCountry")}</option>
+                                        <option value="US">{t("checkout:countries.US")}</option>
+                                        <option value="CA">{t("checkout:countries.CA")}</option>
+                                        <option value="UK">{t("checkout:countries.UK")}</option>
+                                        <option value="DE">{t("checkout:countries.DE")}</option>
+                                        <option value="FR">{t("checkout:countries.FR")}</option>
+                                        <option value="AU">{t("checkout:countries.AU")}</option>
                                     </select>
                                     <p className="text-sm mt-1 text-red-700">{errors.country?.message}</p>
                                 </div>
@@ -138,7 +139,7 @@ export default function CheckoutPage() {
                     <div className="lg:col-span-1">
                         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-24">
                             <h3 className="text-lg font-bold text-gray-900 mb-4">
-                                Your Order
+                                {t("checkout:yourOrder")}
                             </h3>
                             <div className="divide-y divide-gray-50">
                                 {items.map((item) => (
@@ -153,7 +154,7 @@ export default function CheckoutPage() {
                                                 {item.title}
                                             </p>
                                             <p className="text-xs text-gray-500">
-                                                Qty: {item.quantity}
+                                                {t("checkout:qty", { count: item.quantity })}
                                             </p>
                                         </div>
                                         <span className="text-sm font-semibold text-gray-900 shrink-0">
@@ -165,19 +166,19 @@ export default function CheckoutPage() {
 
                             <div className="mt-4 pt-4 border-t border-gray-100 space-y-2">
                                 <div className="flex justify-between text-sm text-gray-600">
-                                    <span>Subtotal</span>
+                                    <span>{t("cart:subtotal", { count: items.reduce((s,i)=>s+i.quantity,0) })}</span>
                                     <span>${totalPrice.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between text-sm text-gray-600">
-                                    <span>Shipping</span>
-                                    <span className="text-emerald-600">Free</span>
+                                    <span>{t("cart:shipping")}</span>
+                                    <span className="text-emerald-600">{t("cart:free")}</span>
                                 </div>
                                 <div className="flex justify-between text-sm text-gray-600">
-                                    <span>Tax</span>
+                                    <span>{t("cart:tax")}</span>
                                     <span>${(totalPrice * 0.08).toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between font-bold text-gray-900 pt-2 border-t border-gray-100">
-                                    <span>Total</span>
+                                    <span>{t("cart:total")}</span>
                                     <span>${(totalPrice * 1.08).toFixed(2)}</span>
                                 </div>
                             </div>
@@ -186,7 +187,7 @@ export default function CheckoutPage() {
                                 type="submit"
                                 className="mt-6 w-full py-3.5 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
                             >
-                                Place Order
+                                {t("checkout:placeOrder")}
                             </button>
                         </div>
                     </div>

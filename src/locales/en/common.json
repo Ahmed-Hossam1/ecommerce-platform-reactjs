@@ -33,5 +33,11 @@
     "newsletterText": "Subscribe to our newsletter for the latest deals.",
     "emailPlaceholder": "your@email.com",
     "copyright": "© {{year}} ShopHub. All rights reserved."
+  },
+  "productCard": {
+    "onlyLeft": "Only {{stock}} left",
+    "outOfStock": "Out of Stock",
+    "removeFromCompare": "Remove from Compare",
+    "addToCompare": "Add to Compare"
   }
 }

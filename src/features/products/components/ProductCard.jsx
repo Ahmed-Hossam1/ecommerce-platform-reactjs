@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import useCartStore from "../../cart/hooks/useCartStore";
 import useWishlistStore from "../../wishlist/hooks/useWishlistStore";
 import useCompareStore from "../../compare/hooks/useCompareStore";
+import { useTranslation } from "react-i18next";
 
 export default function ProductCard({ product }) {
+    const { t } = useTranslation("common");
     const addToCart = useCartStore((s) => s.addToCart);
     const addToWishlist = useWishlistStore((s) => s.addToWishlist);
     const removeFromWishlist = useWishlistStore((s) => s.removeFromWishlist);
@@ -58,12 +60,12 @@ export default function ProductCard({ product }) {
                 />
                 {product.stock <= 10 && product.stock > 0 && (
                     <span className="absolute top-3 left-3 bg-amber-500 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
-                        Only {product.stock} left
+                        {t("productCard.onlyLeft", { stock: product.stock })}
                     </span>
                 )}
                 {product.stock === 0 && (
                     <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
-                        Out of Stock
+                        {t("productCard.outOfStock")}
                     </span>
                 )}
                 {/* Wishlist button */}
@@ -117,7 +119,7 @@ export default function ProductCard({ product }) {
                                     ? removeFromCompare(product.id)
                                     : addToCompare(product)
                             }
-                            title={isInCompare ? "Remove from Compare" : "Add to Compare"}
+                            title={isInCompare ? t("productCard.removeFromCompare") : t("productCard.addToCompare")}
                             className={`p-1.5 rounded-lg border-2 transition-all duration-200 ${
                                 isInCompare
                                     ? "border-primary-500 bg-primary-50 text-primary-600"
@@ -133,7 +135,7 @@ export default function ProductCard({ product }) {
                             disabled={product.stock === 0}
                             className="px-3 py-1.5 bg-primary-600 text-white text-xs font-medium rounded-lg hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                         >
-                            Add to Cart
+                            {t("buttons.addToCart")}
                         </button>
                     </div>
                 </div>

@@ -1,0 +1,9 @@
+{
+  "emptyWishlistTitle": "Your wishlist is empty",
+  "emptyWishlistDesc": "Save items you love by clicking the heart icon on any product.",
+  "browseProducts": "Browse Products",
+  "title": "Wishlist",
+  "itemsSaved": "{{count}} item saved",
+  "itemsSaved_plural": "{{count}} items saved",
+  "moveToCart": "Move to Cart"
+}

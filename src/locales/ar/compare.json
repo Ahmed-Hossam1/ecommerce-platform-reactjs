@@ -1,0 +1,19 @@
+{
+  "title": "مقارنة المنتجات",
+  "subtitle": "اختر منتجين لمقارنتهما جنباً إلى جنب",
+  "productA": "المنتج أ",
+  "productB": "المنتج ب",
+  "selectProduct": "اختر منتجاً...",
+  "clearCompareList": "مسح قائمة المقارنة",
+  "feature": "الميزة",
+  "selectProductA": "اختر المنتج أ",
+  "selectProductB": "اختر المنتج ب",
+  "price": "السعر",
+  "rating": "التقييم",
+  "stock": "المخزون",
+  "category": "الفئة",
+  "units": "وحدات",
+  "description": "الوصف",
+  "selectToCompareTitle": "اختر منتجات للمقارنة",
+  "selectToCompareDesc": "اختر منتجين من القوائم المنسدلة أعلاه لرؤية مقارنة مفصلة جنباً إلى جنب."
+}
