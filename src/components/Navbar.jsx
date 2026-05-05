@@ -3,6 +3,7 @@ import { useState } from "react";
 import useCartStore from "../features/cart/hooks/useCartStore";
 import useCompareStore from "../features/compare/hooks/useCompareStore";
 import { useTranslation } from "react-i18next";
+import LanguageChanger from "./LanguageChanger";
 
 export default function Navbar() {
     const { t } = useTranslation("common");
@@ -50,8 +51,10 @@ export default function Navbar() {
                         ))}
                     </div>
 
-                    {/* Cart + Mobile Toggle */}
-                    <div className="flex items-center gap-3">
+                    {/* Actions */}
+                    <div className="flex items-center gap-2 sm:gap-4">
+                        <LanguageChanger />
+                        
                         <Link
                             to="/cart"
                             className="relative p-2 text-gray-600 hover:text-primary-600 transition-colors"

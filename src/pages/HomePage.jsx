@@ -59,18 +59,6 @@ export default function HomePage() {
               {t("hero.description")}
             </p>
             <div className="flex flex-wrap gap-4">
-              <button
-                className="px-8 py-3.5 bg-white text-primary-700 font-semibold rounded-xl hover:bg-primary-50 transition-all shadow-lg shadow-primary-900/20 hover:shadow-xl"
-                onClick={() => i18n.changeLanguage("en")}
-              >
-                {t("hero.changeEn")}
-              </button>
-              <button
-                className="px-8 py-3.5 bg-white text-primary-700 font-semibold rounded-xl hover:bg-primary-50 transition-all shadow-lg shadow-primary-900/20 hover:shadow-xl"
-                onClick={() => i18n.changeLanguage("ar")}
-              >
-                {t("hero.changeAr")}
-              </button>
               <Link
                 to="/products"
                 className="px-8 py-3.5 bg-white text-primary-700 font-semibold rounded-xl hover:bg-primary-50 transition-all shadow-lg shadow-primary-900/20 hover:shadow-xl"
